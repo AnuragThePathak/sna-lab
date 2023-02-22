@@ -1,17 +1,16 @@
 import matplotlib.pyplot as plt
-import networkx as nx
-import csv
+import networkx as nx      
 
-G = nx.Graph()
-with open('./dolphins.csv', 'r') as f:
-	data = csv.reader(f)
-	for row in data:
-		G.add_edge(row[0], row[1])
+g = nx.erdos_renyi_graph(100, 0.04)
+nx.draw_networkx(g)
+plt.show()
+
+g = nx.barabasi_albert_graph(50, 10)
+nx.draw_networkx(g)
+plt.show()
 
 
-deg_centrality = nx.degree_centrality(G)
-print(deg_centrality)
-
-plt.figure(figsize=(13, 8))
-nx.draw_networkx(G, with_labels= True)
+g = nx.LFR_benchmark_graph(n=250, tau1=3, tau2=1.5,
+                            mu=0.1, average_degree=5, min_community=20, seed=10)
+nx.draw_networkx(g)
 plt.show()
